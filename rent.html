@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rent Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dark-body">
+<header class="navbar">
+    <h2 class="logo">⚡ Power Service Generator</h2>
+
+    <div class="nav-links">
+        <a href="/dashboard">Home</a>
+        <a href="/my_bookings">My Bookings</a>
+        <a href="/contact">Contact</a>
+        <a href="/logout">Logout</a>
+    </div>
+</header>
+<div class="rent-box">
+    <h2 id="genName">Generator</h2>
+
+    <p class="price">
+        ₹<span id="pricePerDay"></span> / day
+    </p>
+
+    <label>Number of Days</label>
+    <input type="number" id="days" value="1" min="1" required>
+
+    <label>Delivery Area / City</label>
+    <input type="text" name="city" placeholder="e.g. Andheri, Mumbai" required>
+
+    <div class="total-box">
+        <h3 id="totalAmount">Total: ₹0</h3>
+    </div>
+
+    <!-- FORM POST TO /rent -->
+    <form method="POST" action="/rent">
+        <input type="hidden" name="generator" id="gen">
+        <input type="hidden" name="days" id="daysInput">
+        <input type="hidden" name="total" id="totalInput">
+
+        <button type="submit" class="confirm-btn">
+            Confirm & Pay
+        </button>
+    </form>
+</div>
+
+<script>
+const gen = localStorage.getItem("selectedGen");
+if (!gen) {
+    alert("Please select generator first");
+    window.location.href = "/dashboard";
+}
+
+const prices = {
+    "5KVA": 500,
+    "10KVA": 1000,
+    "20KVA": 2000,
+    "30KVA": 3000,
+    "50KVA": 4000,
+    "75KVA": 5500,
+    "100KVA": 7000,
+    "150KVA": 9000,
+    "200KVA": 12000
+};
+
+document.getElementById("genName").innerText = gen + " Generator";
+document.getElementById("pricePerDay").innerText = prices[gen];
+document.getElementById("gen").value = gen;
+
+const daysInput = document.getElementById("days");
+const totalText = document.getElementById("totalAmount");
+
+function calculateTotal() {
+    const days = Number(daysInput.value);
+    const total = prices[gen] * days;
+
+    totalText.innerText = "Total: ₹" + total;
+    document.getElementById("daysInput").value = days;
+    document.getElementById("totalInput").value = total;
+}
+
+daysInput.addEventListener("input", calculateTotal);
+calculateTotal();
+</script>
+
+</body>
+</html>

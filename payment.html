@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complete Payment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark-bg">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div style="color:red; text-align:center; margin-bottom:10px;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="payment-box">
+
+    <h2>Complete Payment</h2>
+    <h3>Total Amount: ₹{{ amount }}</h3>
+
+    <!-- QR Section -->
+    <div class="qr-section">
+        <h4>Scan & Pay</h4>
+        <img src="{{ url_for('static', filename='images/qr.png') }}" class="qr-img">
+        <p>UPI ID: <b>powerservice@upi</b></p>
+    </div>
+
+    <!-- IMPORTANT: names now MATCH backend -->
+    <form method="POST" enctype="multipart/form-data" onsubmit="return validateUPI()">
+
+        <div class="input-group">
+            <label>Your UPI ID</label>
+            <input type="text" id="upi_id" name="upi_id" placeholder="example@upi" required>
+        </div>
+
+        <div class="input-group">
+            <label>Transaction ID</label>
+            <!-- MUST match backend: payment_ref -->
+            <input type="text" name="payment_ref" required>
+        </div>
+
+        <div class="input-group">
+            <label>Upload Payment Screenshot</label>
+            <!-- MUST match backend: screenshot -->
+            <input type="file" name="screenshot" id="fileInput" accept="image/png, image/jpeg" required>
+        </div>
+
+        <button type="submit">Submit Payment</button>
+
+    </form>
+
+</div>
+
+<script>
+function validateUPI() {
+    var upi = document.getElementById("upi_id").value;
+    var pattern = /^[a-zA-Z0-9.\-_]{3,}@[a-zA-Z]{3,}$/;
+
+    if (!pattern.test(upi)) {
+        alert("Invalid UPI ID");
+        return false;
+    }
+
+    var fileInput = document.getElementById("fileInput");
+    var file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please upload payment screenshot");
+        return false;
+    }
+
+    var allowedTypes = ["image/jpeg", "image/png"];
+    if (!allowedTypes.includes(file.type)) {
+        alert("Only payment screenshot image allowed (JPG/PNG)");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>
