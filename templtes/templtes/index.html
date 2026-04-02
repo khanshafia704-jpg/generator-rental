@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Textile Similarity Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🧵 Textile Similarity Finder</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Find Similar Fabrics</button>
+    </form>
+
+    {% if images %}
+        <h2>Similar Fabrics</h2>
+        <div class="results">
+            {% for img, name in images %}
+                <div class="card">
+                    <img src="{{ img }}">
+                    <p>{{ name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
