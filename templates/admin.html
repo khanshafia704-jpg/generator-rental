@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial; background: #111; color: white; }
+        table { width: 100%; margin-bottom: 30px; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid white; text-align: center; }
+        h2 { color: yellow; }
+    </style>
+</head>
+<body>
+
+<h1>⚡ Admin Dashboard</h1>
+
+<h2>Users</h2>
+<table>
+<tr>
+    <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+</tr>
+{% for u in users %}
+<tr>
+    <td>{{u[0]}}</td>
+    <td>{{u[1]}}</td>
+    <td>{{u[2]}}</td>
+    <td>{{u[3]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h2>Bookings</h2>
+<table>
+<tr>
+    <th>ID</th><th>User</th><th>Generator</th><th>Days</th><th>Status</th>
+</tr>
+{% for b in bookings %}
+<tr>
+    <td>{{b[0]}}</td>
+    <td>{{b[1]}}</td>
+    <td>{{b[2]}}</td>
+    <td>{{b[3]}}</td>
+    <td>{{b[4]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h2>Payments</h2>
+<table>
+<tr>
+    <th>ID</th><th>User</th><th>Amount</th><th>Method</th><th>Status</th>
+</tr>
+{% for p in payments %}
+<tr>
+    <td>{{p[0]}}</td>
+    <td>{{p[1]}}</td>
+    <td>{{p[2]}}</td>
+    <td>{{p[3]}}</td>
+    <td>{{p[4]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
