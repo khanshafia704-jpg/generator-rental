@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | Power Service Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h2 class="logo">⚡ Power Service Generator</h2>
+
+    <div class="nav-links">
+        <a href="/dashboard">Home</a>
+        <a href="/my_bookings">My Bookings</a>
+        <a href="/contact">Contact</a>
+        <a href="/logout">Logout</a>
+    </div>
+</header>
+
+<main class="dash-content">
+    <h1>Available Generators</h1>
+
+    <div class="gen-grid">
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen1.jpg') }}">
+            <h3>5 KVA Generator</h3>
+            <p>Homes & small shops</p>
+            <p class="price">₹500 / day</p>
+            <button onclick="goCustomer('5KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen2.jpg') }}">
+            <h3>10 KVA Generator</h3>
+            <p>Homes & small offices</p>
+            <p class="price">₹1000 / day</p>
+            <button onclick="goCustomer('10KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen3.jpg') }}">
+            <h3>20 KVA Generator</h3>
+            <p>Shops & restaurants</p>
+            <p class="price">₹2000 / day</p>
+            <button onclick="goCustomer('20KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen4.jpg') }}">
+            <h3>30 KVA Generator</h3>
+            <p>Events & offices</p>
+            <p class="price">₹3000 / day</p>
+            <button onclick="goCustomer('30KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen5.jpg') }}">
+            <h3>50 KVA Generator</h3>
+            <p>Hotels & large events</p>
+            <p class="price">₹4000 / day</p>
+            <button onclick="goCustomer('50KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen6.jpg') }}">
+            <h3>75 KVA Generator</h3>
+            <p>Commercial usage</p>
+            <p class="price">₹5500 / day</p>
+            <button onclick="goCustomer('75KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen7.jpg') }}">
+            <h3>100 KVA Generator</h3>
+            <p>Construction sites</p>
+            <p class="price">₹7000 / day</p>
+            <button onclick="goCustomer('100KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen8.jpg') }}">
+            <h3>150 KVA Generator</h3>
+            <p>Factories & plants</p>
+            <p class="price">₹9000 / day</p>
+            <button onclick="goCustomer('150KVA')">Rent Now</button>
+        </div>
+
+        <div class="gen-card">
+            <img src="{{ url_for('static', filename='images/gen9.jpg') }}">
+            <h3>200 KVA Generator</h3>
+            <p>Heavy industrial use</p>
+            <p class="price">₹12000 / day</p>
+            <button onclick="goCustomer('200KVA')">Rent Now</button>
+        </div>
+
+    </div>
+</main>
+
+<script>
+function goCustomer(gen){
+    localStorage.setItem("selectedGen", gen);
+    window.location.href = "/customer";
+}
+</script>
+
+</body>
+</html>
