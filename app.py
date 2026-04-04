@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_PATH = os.path.join(BASE_DIR, "database.db")
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 app.secret_key = "secretkey"
 
 UPLOAD_FOLDER = "static/uploads"
