@@ -123,6 +123,17 @@ def login():
 
     return render_template("login.html")
 
+
+@app.route("/admin")
+def admin():
+    import sqlite3
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users")
+    users = cur.fetchall()
+    conn.close()
+    return str(users)
+
 # ---------------- DASHBOARD ---------------- #
 
 @app.route("/dashboard")
