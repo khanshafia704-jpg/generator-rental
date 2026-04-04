@@ -129,10 +129,25 @@ def admin():
     import sqlite3
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
+
+    # users
     cur.execute("SELECT * FROM users")
     users = cur.fetchall()
+
+    # bookings
+    cur.execute("SELECT * FROM bookings")
+    bookings = cur.fetchall()
+
+    # payments (agar table hai)
+    cur.execute("SELECT * FROM payments")
+    payments = cur.fetchall()
+
     conn.close()
-    return str(users)
+
+    return render_template("admin.html",
+                           users=users,
+                           bookings=bookings,
+                           payments=payments)
 
 # ---------------- DASHBOARD ---------------- #
 
