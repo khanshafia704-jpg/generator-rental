@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Bookings</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+
+body{
+background:#0b132b;
+font-family:Arial;
+margin:0;
+}
+
+.bookings-container{
+width:80%;
+margin:60px auto;
+}
+
+.bookings-title{
+color:gold;
+font-size:32px;
+margin-bottom:30px;
+}
+
+.bookings-table{
+width:100%;
+border-collapse:collapse;
+background:#111;
+border-radius:10px;
+overflow:hidden;
+}
+
+.bookings-table th{
+background:black;
+color:gold;
+padding:14px;
+font-size:16px;
+}
+
+.bookings-table td{
+padding:14px;
+text-align:center;
+color:white;
+border-bottom:1px solid #333;
+}
+
+.bookings-table tr:hover{
+background:#1c1c1c;
+}
+
+.status-success{
+color:#2ecc71;
+font-weight:bold;
+}
+
+.status-failed{
+color:#e74c3c;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+    
+
+<header class="navbar">
+    <h2 class="logo">⚡ Power Service Generator</h2>
+
+    <div class="nav-links">
+        <a href="/dashboard">Home</a>
+        <a href="/my_bookings">My Bookings</a>
+        <a href="/contact">Contact</a>
+        <a href="/logout">Logout</a>
+    </div>
+</header>
+
+<div class="bookings-container">
+
+<h1 class="bookings-title">📋 My Bookings</h1>
+
+<table class="bookings-table">
+
+<tr>
+<th>Generator</th>
+<th>Days</th>
+<th>Total</th>
+<th>Status</th>
+</tr>
+
+{% for b in bookings %}
+
+<tr>
+
+<td>{{ b[0] }}</td>
+<td>{{ b[1] }}</td>
+<td>₹{{ b[2] }}</td>
+
+<td>
+{% if b[3] == "Success" %}
+<span class="status-success">Success</span>
+{% else %}
+<span class="status-failed">Failed</span>
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
