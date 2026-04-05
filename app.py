@@ -150,11 +150,8 @@ def admin():
 
     conn.close()
 
-    return {
-        "users": users,
-        "bookings": bookings,
-        "payments": payments
-    }
+    return render_template("admin.html", users=users, bookings=bookings, payments=payments)
+        
 
    
 
