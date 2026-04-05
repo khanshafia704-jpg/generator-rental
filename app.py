@@ -210,27 +210,6 @@ def customer():
     return render_template("customer-details.html")
 
 
-@app.route("/book", methods=["POST"])
-def book():
-    import sqlite3
-
-    user = session.get("user")
-    generator = request.form.get("generator")
-    days = request.form.get("days")
-
-    conn = sqlite3.connect("database.db")
-    cur = conn.cursor()
-
-    cur.execute(
-        "INSERT INTO bookings (user, generator, days, status) VALUES (?, ?, ?, ?)",
-        (user, generator, days, "Pending")
-    )
-
-    conn.commit()
-    conn.close()
-
-    return redirect("/dashboard")
-
 # ---------------- RENT ---------------- #
 
 @app.route("/rent", methods=["GET","POST"])
@@ -268,7 +247,6 @@ def rent():
     return render_template("rent.html")
 
 # ---------------- PAYMENT ---------------- #
-
 @app.route("/payment", methods=["GET","POST"])
 def payment():
 
@@ -291,7 +269,6 @@ def payment():
         filename = ""
 
         if screenshot and screenshot.filename != "":
-
             ext = screenshot.filename.rsplit(".",1)[-1].lower()
 
             if ext not in ["jpg","jpeg","png"]:
@@ -304,6 +281,7 @@ def payment():
         conn = sqlite3.connect(DATABASE_PATH)
         cursor = conn.cursor()
 
+        # ✅ PAYMENT INSERT
         cursor.execute("""
         INSERT INTO payments
         (user_email,generator,days,total,address,city,transaction_id,screenshot,status)
@@ -316,6 +294,18 @@ def payment():
             session.get("city"),
             transaction_id,
             filename,
+            status
+        ))
+
+        # ✅ BOOKING INSERT (MAIN FIX)
+        cursor.execute("""
+        INSERT INTO bookings (user, generator, days, total, status)
+        VALUES (?, ?, ?, ?, ?)
+        """, (
+            session["user"],
+            session.get("generator"),
+            session.get("days"),
+            session.get("total"),
             status
         ))
 
