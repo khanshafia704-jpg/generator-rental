@@ -169,6 +169,19 @@ def admin():
     conn.close()
 
     return render_template("admin.html", users=users, bookings=bookings, payments=payments)
+
+@app.route("/delete_booking/<int:id>")
+def delete_booking(id):
+    import sqlite3
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+
+    cur.execute("DELETE FROM bookings WHERE id = ?", (id,))
+    
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
         
 
    
