@@ -14,6 +14,15 @@ CREATE TABLE IF NOT EXISTS users (
 )
 """)
 
+CREATE TABLE bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user TEXT,
+    generator TEXT,
+    days INTEGER,
+    total INTEGER,
+    status TEXT
+);
+
 # PAYMENTS TABLE
 cur.execute("""
 CREATE TABLE IF NOT EXISTS payments (
