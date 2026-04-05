@@ -182,6 +182,28 @@ def customer():
 
     return render_template("customer-details.html")
 
+
+@app.route("/book", methods=["POST"])
+def book():
+    import sqlite3
+
+    user = session.get("user")
+    generator = request.form.get("generator")
+    days = request.form.get("days")
+
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+
+    cur.execute(
+        "INSERT INTO bookings (user, generator, days, status) VALUES (?, ?, ?, ?)",
+        (user, generator, days, "Pending")
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/dashboard")
+
 # ---------------- RENT ---------------- #
 
 @app.route("/rent", methods=["GET","POST"])
