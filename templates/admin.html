@@ -24,12 +24,18 @@
         h2 {
             margin-top: 40px;
         }
+        .delete-btn {
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <h1>Admin Dashboard</h1>
 
+<!-- USERS -->
 <h2>Users</h2>
 <table>
 <tr>
@@ -50,6 +56,7 @@
 </table>
 
 
+<!-- BOOKINGS -->
 <h2>Bookings</h2>
 <table>
 <tr>
@@ -58,6 +65,7 @@
     <th>Generator</th>
     <th>Days</th>
     <th>Status</th>
+    <th>Delete</th>
 </tr>
 
 {% for b in bookings %}
@@ -66,12 +74,21 @@
     <td>{{ b[1] }}</td>
     <td>{{ b[2] }}</td>
     <td>{{ b[3] }}</td>
-    <td>{{ b[-1] }}</td>
+    <td>{{ b[5] }}</td>
+
+    <td>
+        <a href="/delete_booking/{{ b[0] }}" 
+           onclick="return confirm('Are you sure you want to delete this booking?')" 
+           class="delete-btn">
+           Delete
+        </a>
+    </td>
 </tr>
 {% endfor %}
 </table>
 
 
+<!-- PAYMENTS -->
 <h2>Payments</h2>
 <table>
 <tr>
