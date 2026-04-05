@@ -16,11 +16,11 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 # ---------------- DATABASE SETUP ---------------- #
-
 def init_db():
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
+    # USERS TABLE
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,24 +31,19 @@ def init_db():
     )
     """)
 
+    # BOOKINGS TABLE
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS bookings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user TEXT,
+        generator TEXT,
+        days INTEGER,
+        total INTEGER,
+        status TEXT
+    )
+    """)
 
-conn = sqlite3.connect("database.db")
-cur = conn.cursor()
-
-cur.execute("""
-CREATE TABLE IF NOT EXISTS bookings (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user TEXT,
-    generator TEXT,
-    days INTEGER,
-    total INTEGER,
-    status TEXT
-)
-""")
-
-conn.commit()
-conn.close()
-
+    # PAYMENTS TABLE
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS payments(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -67,8 +62,9 @@ conn.close()
     conn.commit()
     conn.close()
 
-init_db()
 
+# CALL FUNCTION
+init_db()
 # ---------------- HOME ---------------- #
 
 @app.route("/")
