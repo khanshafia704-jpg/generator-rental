@@ -31,6 +31,24 @@ def init_db():
     )
     """)
 
+
+conn = sqlite3.connect("database.db")
+cur = conn.cursor()
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user TEXT,
+    generator TEXT,
+    days INTEGER,
+    total INTEGER,
+    status TEXT
+)
+""")
+
+conn.commit()
+conn.close()
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS payments(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
