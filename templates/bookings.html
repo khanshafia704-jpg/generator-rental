@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 <style>
-
 body{
 background:#0b132b;
 font-family:Arial;
@@ -59,6 +58,25 @@ color:#e74c3c;
 font-weight:bold;
 }
 
+/* FORM STYLE */
+.form-box{
+margin-bottom:30px;
+}
+
+input{
+padding:10px;
+margin:10px;
+border:none;
+border-radius:5px;
+}
+
+button{
+padding:10px 20px;
+background:gold;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
 </style>
 
 </head>
@@ -81,6 +99,22 @@ font-weight:bold;
 
 <h1 class="bookings-title">📋 My Bookings</h1>
 
+<!-- ✅ BOOKING FORM -->
+<div class="form-box">
+
+<form method="POST" action="/book">
+
+<input type="text" name="generator" placeholder="Enter Generator (5KVA / 10KVA)" required>
+
+<input type="number" name="days" placeholder="Days" required>
+
+<button type="submit">Book Now</button>
+
+</form>
+
+</div>
+
+<!-- ✅ BOOKINGS TABLE -->
 <table class="bookings-table">
 
 <tr>
@@ -94,12 +128,12 @@ font-weight:bold;
 
 <tr>
 
-<td>{{ b[0] }}</td>
-<td>{{ b[1] }}</td>
-<td>₹{{ b[2] }}</td>
+<td>{{ b[2] }}</td>   <!-- generator -->
+<td>{{ b[3] }}</td>   <!-- days -->
+<td>₹{{ b[4] }}</td>  <!-- total -->
 
 <td>
-{% if b[3] == "Success" %}
+{% if b[5] == "Success" %}
 <span class="status-success">Success</span>
 {% else %}
 <span class="status-failed">Failed</span>
