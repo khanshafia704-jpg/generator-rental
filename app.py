@@ -178,7 +178,31 @@ def delete_booking(id):
     conn.close()
 
     return redirect("/admin")
-        
+
+@app.route("/delete_user/<int:id>")
+def delete_user(id):
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+
+    cur.execute("DELETE FROM users WHERE id = ?", (id,))
+    
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
+
+
+@app.route("/delete_payment/<int:id>")
+def delete_payment(id):
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+
+    cur.execute("DELETE FROM payments WHERE id = ?", (id,))
+    
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
 
    
 
