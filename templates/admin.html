@@ -24,10 +24,9 @@
         h2 {
             margin-top: 40px;
         }
-        .delete-btn {
+        a {
             color: red;
-            font-weight: bold;
-            cursor: pointer;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -52,9 +51,8 @@
     <td>{{ user[1] }}</td>
     <td>{{ user[2] }}</td>
     <td>{{ user[3] }}</td>
-
     <td>
-        <a href="/delete_user/{{ user[0] }}" style="color:red;">Delete</a>
+        <a href="/delete_user/{{ user[0] }}">Delete</a>
     </td>
 </tr>
 {% endfor %}
@@ -80,13 +78,8 @@
     <td>{{ b[2] }}</td>
     <td>{{ b[3] }}</td>
     <td>{{ b[5] }}</td>
-
     <td>
-        <a href="/delete_booking/{{ b[0] }}" 
-           onclick="return confirm('Are you sure you want to delete this booking?')" 
-           class="delete-btn">
-           Delete
-        </a>
+        <a href="/delete_booking/{{ b[0] }}">Delete</a>
     </td>
 </tr>
 {% endfor %}
@@ -99,9 +92,11 @@
 <tr>
     <th>ID</th>
     <th>User</th>
-    <th>Amount</th>
+    <th>Generator</th>
+    <th>Days</th>
+    <th>Total</th>
     <th>Status</th>
-    <th>Delete</th>
+    <th>Action</th>
 </tr>
 
 {% for p in payments %}
@@ -109,13 +104,15 @@
     <td>{{ p[0] }}</td>
     <td>{{ p[1] }}</td>
     <td>{{ p[2] }}</td>
-    <td>{{ p[-1] }}</td>
-
+    <td>{{ p[3] }}</td>
+    <td>{{ p[4] }}</td>
+    <td>{{ p[9] }}</td>
     <td>
-        <a href="/delete_payment/{{ p[0] }}" style="color:red;">Delete</a>
+        <a href="/approve_payment/{{ p[0] }}">Approve</a>
     </td>
 </tr>
 {% endfor %}
 </table>
+
 </body>
 </html>
