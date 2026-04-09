@@ -347,8 +347,8 @@ def payment():
     
     @app.route("/approve_payment/<int:id>")
     def approve_payment(id):
-    conn = sqlite3.connect(DATABASE_PATH)
-    cur = conn.cursor()
+        conn = sqlite3.connect(DATABASE_PATH)
+        cur = conn.cursor()
 
     cur.execute("UPDATE payments SET status='Success' WHERE id=?", (id,))
     
