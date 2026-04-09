@@ -346,7 +346,7 @@ def payment():
     return render_template("payment.html", amount=session.get("total"))
     
     @app.route("/approve_payment/<int:id>")
-def approve_payment(id):
+    def approve_payment(id):
     conn = sqlite3.connect(DATABASE_PATH)
     cur = conn.cursor()
 
