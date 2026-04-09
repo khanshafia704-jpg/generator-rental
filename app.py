@@ -282,7 +282,7 @@ def payment():
         transaction_id = request.form.get("payment_ref")
         screenshot = request.files.get("screenshot")
 
-        status = "Success"
+        status = "Pending"
 
         if not transaction_id or len(transaction_id) < 8:
             status = "Failed"
@@ -344,6 +344,18 @@ def payment():
         return redirect(url_for("payment"))
 
     return render_template("payment.html", amount=session.get("total"))
+    
+    @app.route("/approve_payment/<int:id>")
+def approve_payment(id):
+    conn = sqlite3.connect(DATABASE_PATH)
+    cur = conn.cursor()
+
+    cur.execute("UPDATE payments SET status='Success' WHERE id=?", (id,))
+    
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
 
 # ---------------- CONTACT ---------------- #
 
