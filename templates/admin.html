@@ -96,7 +96,7 @@
     <th>Days</th>
     <th>Total</th>
     <th>Status</th>
-    <th>Action</th>
+    <th>Delete</th>
 </tr>
 
 {% for p in payments %}
@@ -108,7 +108,7 @@
     <td>{{ p[4] }}</td>
     <td>{{ p[9] }}</td>
     <td>
-        <a href="/approve_payment/{{ p[0] }}">Approve</a>
+        <a href="/delete_payment/{{ p[0] }}">Delete</a>
     </td>
 </tr>
 {% endfor %}
